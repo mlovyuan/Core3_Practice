@@ -34,7 +34,7 @@ namespace CorePractice01
             {
                 app.UseDeveloperExceptionPage();
             }
-            // MVC正常應該會使用到Html, CSS, JQuery等靜態文件
+            // MVC正常應該會使用到Html, CSS, JQuery等靜態文件，檔案會放在wwwroot
             app.UseStaticFiles();
 
             // 強制轉成https

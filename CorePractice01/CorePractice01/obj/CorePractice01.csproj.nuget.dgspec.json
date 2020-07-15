@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\awey1\\Desktop\\Learn\\CorePractice01\\CorePractice01\\CorePractice01.csproj": {}
+    "C:\\Users\\awey1\\Desktop\\Learn\\Core3_Practice\\CorePractice01\\CorePractice01\\CorePractice01.csproj": {}
   },
   "projects": {
-    "C:\\Users\\awey1\\Desktop\\Learn\\CorePractice01\\CorePractice01\\CorePractice01.csproj": {
+    "C:\\Users\\awey1\\Desktop\\Learn\\Core3_Practice\\CorePractice01\\CorePractice01\\CorePractice01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\awey1\\Desktop\\Learn\\CorePractice01\\CorePractice01\\CorePractice01.csproj",
+        "projectUniqueName": "C:\\Users\\awey1\\Desktop\\Learn\\Core3_Practice\\CorePractice01\\CorePractice01\\CorePractice01.csproj",
         "projectName": "CorePractice01",
-        "projectPath": "C:\\Users\\awey1\\Desktop\\Learn\\CorePractice01\\CorePractice01\\CorePractice01.csproj",
+        "projectPath": "C:\\Users\\awey1\\Desktop\\Learn\\Core3_Practice\\CorePractice01\\CorePractice01\\CorePractice01.csproj",
         "packagesPath": "C:\\Users\\awey1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\awey1\\Desktop\\Learn\\CorePractice01\\CorePractice01\\obj\\",
+        "outputPath": "C:\\Users\\awey1\\Desktop\\Learn\\Core3_Practice\\CorePractice01\\CorePractice01\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "BuildBundlerMinifier": {
+              "target": "Package",
+              "version": "[3.2.449, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
