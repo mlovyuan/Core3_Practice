@@ -20,3 +20,10 @@
     "minify": { "enabled": true }
 }
 ```
+<br>
+<br>
+
+
+### 02
+---
+- 過去的Html Helpers => Core的Tag Helpers，Views/_ViewImports添加Tag Helpers。
