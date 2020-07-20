@@ -142,3 +142,10 @@ C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\De
 C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\CorePractice02.RazorTargetAssemblyInfo.cs
 C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\CorePractice02.Views.pdb
+C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\Razor\Views\Department\DisplayTemplates\Department.cshtml.g.cs
+C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\Razor\Views\Department\Index.cshtml.g.cs
+C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\Razor\Views\Employee\DisplayTemplates\Employee.cshtml.g.cs
+C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Index.cshtml.g.cs
+C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\Razor\Views\Department\Add.cshtml.g.cs
+C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\awey1\Desktop\Learn\Core3_Practice\CorePractice02\CorePractice02\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Add.cshtml.g.cs

@@ -21,6 +21,7 @@ namespace CorePractice02.Controllers
         {
             var department = await _departmentService.GetById(departmentId);
             ViewBag.title = $"Employees of {department.Name}";
+            ViewBag.DepartmentId = departmentId;
 
             var employees = await _employeeService.GetByDepartmentId(departmentId);
             return View(employees);
@@ -28,7 +29,7 @@ namespace CorePractice02.Controllers
 
         public IActionResult Add(int departmentId)
         {
-            ViewBag.titlw = "Add Employee";
+            ViewBag.title = "Add Employee";
             return View(new Employee
             {
                 DepartmentId = departmentId
