@@ -26,4 +26,5 @@
 
 ### 02
 ---
-- 過去的Html Helpers => Core的Tag Helpers，Views/_ViewImports添加Tag Helpers。
+- 過去多數的Html Helpers => Core的Tag Helpers，Views/_ViewImports添加Tag Helpers。
+- asp-route傳遞的value 和 method(action)要承接的參數名要一樣。
