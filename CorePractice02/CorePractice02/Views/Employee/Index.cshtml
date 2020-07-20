@@ -1,7 +1,7 @@
 ﻿@using CorePractice02.Models
-@model IEnumerable<Department>
+@model IEnumerable<Employee>
 @{
-    ViewData["Title"] = "Departments Index";
+    ViewData["Title"] = "Employees Index";
 }
 
 <h1>Index</h1>
@@ -10,10 +10,11 @@
     <div class="col-md-10 offset-md-2">
         <table class="table">
             <tr>
-                <!-- <th> Html.DisplayNameFor(model => model.Name) </th> -->
-                <th>Name</th>
-                <th>Location</th>
-                <th>Employee Count</th>
+                <!-- <th> Html.DisplayNameFor(model => model.FirstName) </th> -->
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Is Fired</th>
                 <th>操作</th>
             </tr>
             <!-- 比起for循環的Html.DisplayFor()的方式，這個等同是將要呈現的模板另外寫到其他檔案讓它參考 -->
@@ -27,3 +28,4 @@
         <a asp-action="Add">Add</a>
     </div>
 </div>
+

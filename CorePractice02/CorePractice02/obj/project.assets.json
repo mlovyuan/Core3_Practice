@@ -8149,11 +8149,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\awey1\\Desktop\\Learn\\Core3_Practice\\CorePractice02\\CorePractice02\\CorePractice02.csproj",
+      "projectUniqueName": "C:\\Users\\awey1\\Desktop\\Learn\\新增資料夾\\Core3_Practice\\CorePractice02\\CorePractice02\\CorePractice02.csproj",
       "projectName": "CorePractice02",
-      "projectPath": "C:\\Users\\awey1\\Desktop\\Learn\\Core3_Practice\\CorePractice02\\CorePractice02\\CorePractice02.csproj",
+      "projectPath": "C:\\Users\\awey1\\Desktop\\Learn\\新增資料夾\\Core3_Practice\\CorePractice02\\CorePractice02\\CorePractice02.csproj",
       "packagesPath": "C:\\Users\\awey1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\awey1\\Desktop\\Learn\\Core3_Practice\\CorePractice02\\CorePractice02\\obj\\",
+      "outputPath": "C:\\Users\\awey1\\Desktop\\Learn\\新增資料夾\\Core3_Practice\\CorePractice02\\CorePractice02\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

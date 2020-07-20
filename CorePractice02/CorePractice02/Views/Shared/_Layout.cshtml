@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <!-- 設定開發環境下使用這些外部資料 -->>
+    <!-- 設定開發環境下使用這些外部資料 -->
     <environment include="Development">
         <!-- Tag Helpers設定使用全部的css，除了壓縮過的 -->
         <link rel="stylesheet" asp-href-include="~/css/*" asp-href-exclude="~/css/all.min.css" />
     </environment>
 
-    <!-- 設定非開發環境下使用這些外部資料-->>
+    <!-- 設定非開發環境下使用這些外部資料-->
     <environment exclude="Development">
         <!-- Tag Helpers設定只使用壓縮過的css -->
         <link rel="stylesheet" asp-href-include="~/css/all.min.css" />
