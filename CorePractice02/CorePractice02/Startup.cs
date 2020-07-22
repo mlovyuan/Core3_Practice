@@ -6,6 +6,7 @@ using CorePractice02.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -13,6 +14,18 @@ namespace CorePractice02
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        // 取得 appSettings.json(組態設定檔) 裡的設定值
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+
+            // 取得 ThisProjectTest 底下 BoldDepartmentEmployeeCount 的值
+            // 可與43行對照觀察，此處會是回傳string
+            string thisProjectTest = _configuration["ThisProjectTest:BoldDepartmentEmployeeCount"];
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -26,6 +39,11 @@ namespace CorePractice02
 
             services.AddSingleton<IDepartmentService, DepartmentService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
+
+            // 透過相依性注入的方式取得 appSettings.json(組態設定檔) 裡"ThisProjectTest"的設定值
+            // 可在Controller那邊用IOptions來注入使用
+            // 在Razor page使用則為 @inject IOptions<ThisProjectTestOptions> + 變數名稱
+            services.Configure<ThisProjectTestOptions>(_configuration.GetSection(key: "ThisProjectTest"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,7 @@
 ﻿using CorePractice02.Models;
 using CorePractice02.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,11 @@ namespace CorePractice02.Controllers
     public class DepartmentController:Controller
     {
         private readonly IDepartmentService _departmentService;
-        public DepartmentController(IDepartmentService departmentService)
+        private readonly IOptions<ThisProjectTestOptions> _options;
+        public DepartmentController(IDepartmentService departmentService, IOptions<ThisProjectTestOptions> options)
         {
             _departmentService = departmentService;
+            _options = options;
         }
         public async Task<IActionResult> Index()
         {
