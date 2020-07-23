@@ -28,3 +28,28 @@
 ---
 - 過去多數的Html Helpers => Core的Tag Helpers，Views/_ViewImports添加Tag Helpers。
 - asp-route傳遞的value 和 method(action)要承接的參數名要一樣。
+- appSettings.json(組態設定檔) 裡的設定值可透過`IConfiguration`讀取，一般會到 startup.cs 使用DI機制從建構式取得 IConfiguration 並保存供後續使用。又或是到`ConfigureServices()`採`IOptions<>`方式取得並應用，詳見DepartmentController 或 DepartmentController.cshtml。
+
+```C#
+private readonly IConfiguration _configuration;
+
+// 取得 appSettings.json(組態設定檔) 裡的設定值
+public Startup(IConfiguration configuration)
+{
+    _configuration = configuration;
+
+    // 取得 ThisProjectTest 底下 BoldDepartmentEmployeeCount 的值
+    // 可與43行對照觀察，此處會是回傳string
+    string thisProjectTest = _configuration["ThisProjectTest:BoldDepartmentEmployeeCount"];
+}
+
+public void ConfigureServices(IServiceCollection services)
+{
+    // 透過相依性注入的方式取得 appSettings.json(組態設定檔) 裡"ThisProjectTest"的設定值
+    // 可在Controller那邊用IOptions來注入使用
+    // 在Razor page使用則為 @inject IOptions<ThisProjectTestOptions> + 變數名稱
+    services.Configure<ThisProjectTestOptions>(_configuration.GetSection(key: "ThisProjectTest"));
+}
+```
+
+- Program.cs可以自訂自己的 appsetings.json file
