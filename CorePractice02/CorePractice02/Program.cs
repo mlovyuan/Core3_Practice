@@ -18,6 +18,12 @@ namespace CorePractice02
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                // 自訂自己的 appsetings.json
+                //.ConfigureAppConfiguration((context, configurationBuilder) =>
+                //{
+                //    configurationBuilder.Sources.Clear();
+                //    configurationBuilder.AddJsonFile("myself.json");
+                //})
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
