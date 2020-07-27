@@ -1,0 +1,13 @@
+﻿@model CorePractice02.Models.CompanySummary
+
+<div class="small">
+    <div class="row h5">@ViewBag.title</div>
+    <div class="row">
+        <div class="col-md-8">員工總數</div>
+        <div class="col-md-4">@Model.EmployeeCount</div>
+    </div>    
+    <div class="row">
+        <div class="col-md-8">部門平均人數</div>
+        <div class="col-md-4">@Model.AverageDepartmentEmployeeCount</div>
+    </div>
+</div>

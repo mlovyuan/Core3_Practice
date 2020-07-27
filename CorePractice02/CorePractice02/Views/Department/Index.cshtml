@@ -22,7 +22,14 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4 offset-md-2">
+    <div class="col-md-2">
+        <!-- 調用繼承自ViewComponent的InvokeAsync方法，name是指定調用名為CompanySummary的file，
+            且會自動尋找Default使用，arguments塞入該InvokeAsync方法的參數 -->
+        @await Component.InvokeAsync(name: "CompanySummary", arguments: new { title = "部門的匯總" })
+        <!-- 另外一種調用方法，但此方式要先將專案自訂的TagHelper註冊進去，可到_ViewImports.cshtml添加 -->
+        <vc:company-summary title="部門的匯總2"></vc:company-summary>
+    </div>
+    <div class="col-md-4">
         <!-- 以前的@Html.Action("Add") -->
         <a asp-action="Add">Add</a>
     </div>
