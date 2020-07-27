@@ -53,3 +53,4 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 - Program.cs可以自訂自己的 appsetings.json file
+- View Component的使用牽扯到了它的繼承關係和`@Component.InvokeAsync`的運用，令人驚豔的是它也能藉由Tag Helpers像幾個前端框架一般自訂Tag。View Component比起Partial View的部分更適合撰寫邏輯運算，且生命週期也較Child Controller短。
