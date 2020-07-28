@@ -1,6 +1,6 @@
 # Core3_Practice
 
-### 01
+### 01   ASP.NET Core入門設定
 ---
 - startup.cs是設定**註冊服務**的地方，其中ConfigureServices function可用來**添加DI(相依性注入)服務**，Configure function是pipeline對其內部middleware的設定處，且各middleware的順序有其意義。
 - wwwroot放置靜態資源。
@@ -24,7 +24,7 @@
 <br>
 
 
-### 02
+### 02   ASP.NET Core MVC練習
 ---
 - 過去多數的Html Helpers => Core的Tag Helpers，Views/_ViewImports添加Tag Helpers。
 - asp-route傳遞的value 和 method(action)要承接的參數名要一樣。
@@ -54,3 +54,12 @@ public void ConfigureServices(IServiceCollection services)
 
 - Program.cs可以自訂自己的 appsetings.json file
 - View Component的使用牽扯到了它的繼承關係和`@Component.InvokeAsync`的運用，令人驚豔的是它也能藉由Tag Helpers像幾個前端框架一般自訂Tag。View Component比起Partial View的部分更適合撰寫邏輯運算，且生命週期也較Child Controller短。
+
+<br>
+<br>
+
+
+### 03   ASP.NET Core Razor Page練習
+---
+- Razor Page 與 MVC 最大的差別在於前者可以將資料、Html，商業邏輯全部寫在同個頁面上，而後者將各項細節拆開編寫，增加了複雜性。
+- Razor Page一般會將其資料存放於**Pages_資料夾**內，而網址列上路由的呼叫方式也與MVC相似，變化不大。
