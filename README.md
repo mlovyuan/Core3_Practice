@@ -63,3 +63,5 @@ public void ConfigureServices(IServiceCollection services)
 ---
 - Razor Page 與 MVC 最大的差別在於前者可以將資料、Html，商業邏輯全部寫在同個頁面上，而後者將各項細節拆開編寫，增加了複雜性。
 - Razor Page一般會將其資料存放於**Pages_資料夾**內，而網址列上路由的呼叫方式也與MVC相似，變化不大。
+- 新增項目的Razor Page和Razor View不同之處在於前者有內建`PageModel`可以使用，可藉由`@page`、`@model`來呼叫。
+- Razor Page的Tag Helpers使用方式會與MVC有部分差異。
