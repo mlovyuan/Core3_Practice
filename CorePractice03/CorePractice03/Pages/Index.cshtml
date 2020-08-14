@@ -17,8 +17,15 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-4">
+        <!-- 跳轉到Department目錄下的AddDepartment頁面 -->
+        <a asp-page="Department/AddDepartment">Add</a>
+    </div>
+</div>
+
 @functions{
-    public IEnumerable<Department> Departments { get; set; }
+    public IEnumerable<Models.Department> Departments { get; set; }
 
     public async Task OnGetAsync()
     {
