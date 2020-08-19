@@ -3,9 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axois from 'axios'
 
 Vue.config.productionTip = false
-
+// 統一讓Vue的其他頁面可以呼叫使用
+Vue.prototype.$http = axios;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

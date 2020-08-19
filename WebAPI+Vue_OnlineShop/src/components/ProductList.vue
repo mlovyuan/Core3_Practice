@@ -9,25 +9,35 @@
     <!-- 產品區 -->
     <div class="product-list">
       <ul>
-        <li>
-          <img src="/static/productImg/apple.jpg" alt />
-          <p class="p-price">$15</p>
-          <p>Apple</p>
-        </li>
-        <li>
-          <img src="/static/productImg/apple.jpg" alt />
-          <p class="p-price">$15</p>
-          <p>Apple</p>
-        </li>
-        <li>
-          <img src="/static/productImg/apple.jpg" alt />
-          <p class="p-price">$15</p>
-          <p>Apple</p>
+        <li v-for="product in productList" :key="product.id">
+          <img :src="product.productImgUrl" alt />
+          <p class="p-price">${{product.price}}</p>
+          <p>{{product.productName}}</p>
         </li>
       </ul>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data(){
+    return{
+      productList:[],
+    }
+  },
+  mounted() {},
+  methods: {
+    getProductList() {
+      thisVue = this;
+      this.$http.get("/api/Products/GetProducts/").then((res) => {
+        this.productList = res.data;
+      });
+    },
+  },
+};
+</script>
+
 
 <!-- scoped代表此css專門for這邊的vue -->
 <style scoped>
