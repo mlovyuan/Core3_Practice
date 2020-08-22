@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import axois from 'axios'
+import axios from 'axios'
 
 Vue.config.productionTip = false
 // 統一讓Vue的其他頁面可以呼叫使用

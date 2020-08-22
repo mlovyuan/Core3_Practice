@@ -10,9 +10,11 @@
     <div class="product-list">
       <ul>
         <li v-for="product in productList" :key="product.id">
-          <img :src="product.productImgUrl" alt />
-          <p class="p-price">${{product.price}}</p>
-          <p>{{product.productName}}</p>
+          <router-link :to="`/ProductDetail?pid=${product.id}`">
+            <img :src="product.productImgUrl" alt />
+            <p class="p-price">${{product.price}}</p>
+            <p>{{product.productName}}</p>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -21,18 +23,22 @@
 
 <script>
 export default {
-  data(){
-    return{
-      productList:[],
-    }
+  data() {
+    return {
+      productList: [],
+    };
   },
-  mounted() {},
+  mounted() {
+    this.getProductList();
+  },
   methods: {
     getProductList() {
-      thisVue = this;
-      this.$http.get("/api/Products/GetProducts/").then((res) => {
-        this.productList = res.data;
-      });
+      let thisVue = this;
+      this.$http
+        .get("https://localhost:44314/api/Products/GetProducts/")
+        .then((res) => {
+          this.productList = res.data;
+        });
     },
   },
 };
