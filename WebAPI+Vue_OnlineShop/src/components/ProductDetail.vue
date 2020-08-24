@@ -17,11 +17,11 @@
           <span class="add" @click="addQuantity">+</span>
         </p>
         <p class="p-AddToCart">
-          <button>放入購物車</button>
+          <button @click="AddCart()">放入購物車</button>
         </p>
       </div>
     </div>
-    <hr style="margin-buttom:20px" />
+    <hr style="margin-bottom:20px" />
     <!-- 商品詳情 -->
     <div class="product-detail">
       <img :src="product.productDetailImgUrl" alt="">
@@ -40,6 +40,7 @@ export default {
   mounted() {
     // 取得上個頁面中放置在連結上的商品id
     let pid = this.$route.query.pid;
+    this.getProductbyId(pid);
   },
   methods: {
     addQuantity() {
@@ -50,10 +51,23 @@ export default {
         this.quantity--;
       }
     },
-    getProductbyId(){
+    getProductbyId(pid){
       let thisVue = this;
-      this.$http.get("").then((res) => {
-        this.product = res.data;
+      this.$http.get(`https://localhost:44314/api/Products/GetProductById?pid=${pid}`).then((res) => {
+        if(res.status == 205){
+          thisVue.$router.push
+        }
+        thisVue.product = res.data;
+      })
+    },
+    AddCart(){
+      let thisVue = this;
+      this.$http.get(`https://localhost:44314/api/Products/AddCart?productid=${this.product.id}&count=${this.quantity}`)
+      .then((res) => {
+        if(res.data > 0){
+          // 如果加入成功就跳轉到AddSuccess頁面
+          thisVue.$router.push("/AddSuccess");
+        }
       })
     }
     /*

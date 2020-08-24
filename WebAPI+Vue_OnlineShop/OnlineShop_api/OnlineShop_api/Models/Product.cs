@@ -26,6 +26,13 @@ namespace OnlineShop_api.Models
       return products;
     }
 
+    public static Product GetProductById( int id)
+    {
+      DataTable dt = SqlHelper.ExecuteTable($"select * from Products where id = {id}");
+      var product = ToModel(dt.Rows[0]);
+      return product;
+    }
+
     private static Product ToModel(DataRow dr)
     {
       Product product = new Product();

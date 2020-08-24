@@ -37,7 +37,7 @@ export default {
       this.$http
         .get("https://localhost:44314/api/Products/GetProducts/")
         .then((res) => {
-          this.productList = res.data;
+          thisVue.productList = res.data;
         });
     },
   },

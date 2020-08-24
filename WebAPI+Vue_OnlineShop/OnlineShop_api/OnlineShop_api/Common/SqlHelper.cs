@@ -23,5 +23,22 @@ namespace OnlineShop_api.Common
         return ds.Tables[0];
       }
     }
+
+    // 增刪改都可用此方法
+    public static int ExecuteNonQuery(string cmdText)
+    {
+      using (SqlConnection con = new SqlConnection(ConStr))
+      {
+        con.Open();
+        SqlCommand cmd = new SqlCommand(cmdText, con);
+        // 返回受影響的行數
+        int rows = cmd.ExecuteNonQuery();
+        if(rows <= 0)
+        {
+          throw new Exception("資料庫執行錯誤");
+        }
+        return rows;
+      }
+    }
   }
 }

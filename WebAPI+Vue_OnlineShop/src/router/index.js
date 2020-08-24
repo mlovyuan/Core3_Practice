@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import ProductList from '@/components/ProductList'
 import ProductDetail from '@/components/ProductDetail'
+import AddSuccess from '@/components/AddSuccess'
+import ErrPage from '@/components/ErrPage'
 
 Vue.use(Router)
 
@@ -17,6 +19,16 @@ export default new Router({
       path: '/ProductDetail',
       name: 'ProductDetail',
       component: ProductDetail
+    },
+    {
+      path: '/AddSuccess',
+      name: 'AddSuccess',
+      component: AddSuccess
+    },
+    {
+      path: '/ErrPage',
+      name: 'ErrPage',
+      component: ErrPage
     }
   ]
 })
