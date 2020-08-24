@@ -65,3 +65,18 @@ public void ConfigureServices(IServiceCollection services)
 - Razor Page一般會將其資料存放於**Pages_資料夾**內，而網址列上路由的呼叫方式也與MVC相似，變化不大。
 - 新增項目的Razor Page和Razor View不同之處在於前者有內建`PageModel`可以使用，可藉由`@page`、`@model`來呼叫。
 - Razor Page的Tag Helpers使用方式會與MVC有部分差異。
+
+<br>
+<br>
+
+
+### WebAPI+Vue_OnlineShop 
+---
+- 欲行駛前後端分離架構，需先確認前後端傳輸與接收的資料格式。
+- 在前端Vue.js框架下，靜態資源一般會存入到static資料夾內，而src資料夾內則放置撰寫前端頁面的檔案，若要使用某些套件於全局，可於main.js中，採`protype`的方式套用。
+- Vue.js的`<script>`中，同樣要注意`this`的調用，`<style scoped>`代表該css設計是專門給定當下頁面Vue的DOM所使用的。
+- 若要跳轉到其他頁面，HTML可使用`<router-link :to="要跳轉的Vue頁面和網址形式">...</router-link>`的tag，`<script>`可使用`this.$router.push("要跳轉的Vue頁面");`。
+- v-model可搭配watch監聽變量，而watch中會將欲監聽的變量其function也需同名才可監聽的到。
+- `this.$route.query.id`取得上個頁面網址上的參數(ex: ?id=2)。
+- 因前後端分離，port不同，傳輸資料會有跨域問題，此時可在後段的startup.cs註冊跨域服務，controller中也要加入中也要加入`[EnableCors("註冊的名字")]`才行。
+- 後端controller內的action想獲取前端傳入api的參數，其名稱需一致，像api參數為?productid=10，後端action的形參也要命名為productid才可接收到。
