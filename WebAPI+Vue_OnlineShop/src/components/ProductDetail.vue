@@ -55,7 +55,7 @@ export default {
       let thisVue = this;
       this.$http.get(`https://localhost:44314/api/Products/GetProductById?pid=${pid}`).then((res) => {
         if(res.status == 205){
-          thisVue.$router.push
+          thisVue.$router.push("/ErrPage");
         }
         thisVue.product = res.data;
       })
