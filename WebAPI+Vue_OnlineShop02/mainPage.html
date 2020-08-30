@@ -36,6 +36,62 @@
             height: 30px;
         }
 
+        .center .product-sort {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .center .sort-item {
+            display: inline-block;
+            width: 32%;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            font-size: 13px;
+        }
+
+        .center div .selected {
+            color: red;
+        }
+
+        .center table {
+            width: 100%;
+        }
+
+        .center td {
+            border-bottom: 6px solid #eee;
+        }
+
+        .center td .pro-img {
+            height: 100px;
+            width: 100px;
+        }
+
+        .center td img {
+            margin-top: 10px;
+            margin-left: 10px;
+            height: 80px;
+            width: 80px;
+            float: left;
+            vertical-align: middle;
+        }
+
+        .center td .pro-info {
+            height: 90px;
+            float: left;
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+
+        .center td .p-name {
+            font-size: 14px;
+            padding-bottom: 10px;
+        }
+
+        .center td .p-price {
+            color: red;
+            font-weight: bold;
+        }
+
         .bottom {
             border-top: 1px solid #ccc;
             position: fixed;
@@ -62,8 +118,27 @@
             <input type="text" placeholder="請輸入搜尋內容">
         </div>
         <div class="center">
-            <div class="center-tab" v-if="tabIndex == 1">商品</div>
-            <div class="center-tab" v-if="tabIndex == 2">購物車</div>
+            <div class="center-tab" v-if="tabIndex == 1">
+                <div class="product-sort">
+                    <div :class="['sort-item', {'selected':sortIndex==1}]" @click="changeSort(1)">綜合</div>
+                    <div :class="['sort-item', {'selected':sortIndex==2}]" @click="changeSort(2)">瀏覽</div>
+                    <div :class="['sort-item', {'selected':sortIndex==3}]" @click="changeSort(3)">銷量</div>
+                </div>
+                <table>
+                    <tr v-for="item in products" :key="item.Id">
+                        <td class="pro-img">
+                            <img :src="item.imageUrl" alt="">
+                        </td>
+                        <td class="pro-info">
+                            <p class="p-name">{{item.productName}}</p>
+                            <p class="p-price">{{item.price}}</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="center-tab" v-if="tabIndex == 2">
+
+            </div>
         </div>
         <div class="bottom">
             <div class="btn" @click="changeTab(1)">商品頁</div>
@@ -72,23 +147,71 @@
     </div>
 
     <script>
-        let vm = Vue({
+        let vm = new Vue({
             el: "#app",
             data: {
                 tabIndex: 1,
+                products: [],
+                sortIndex: 1,
+            },
+            mounted() {
+                this.getProducts();
             },
             methods: {
+                getProducts() {
+                    axios.get("https://localhost:44341/api/products")
+                        .then((res) => this.products = res.data);
+                    this.changeSort(this.sortIndex);
+                },
                 changeTab(tabIndex) {
                     this.tabIndex = tabIndex;
                     switch (tabIndex) {
                         case 1:
                             break;
-                        case 2: 
+                        case 2:
                             break;
                         default:
                             break;
                     }
-                }
+                },
+                // 正常排序要放後端排好再傳過來前端
+                changeSort(index) {
+                    switch (index) {
+                        // 綜合排序
+                        case 1:
+                            // this.products.sort(this.sortComprehensive);
+                            this.products.sort((x, y) => {
+                                return (y.saleTimes * 1.5 + y.clickTimes) - (x.saleTimes * 1.5 + x.clickTimes);
+                            });
+                            break;
+                        // 按照歷史點擊量排序
+                        case 2:
+                            // this.products.sort(this.sortByClickTimes);
+                            this.products.sort((x, y) => {
+                                return y.clickTimes - x.clickTimes;
+                            });
+                            break;
+                        // 按照銷貨量排序
+                        case 3:
+                            // this.products.sort(this.sortBySaleTimes);
+                            this.products.sort((x, y) => {
+                                return y.saleTimes - x.saleTimes;
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                    this.sortIndex = index;
+                },
+                // sortByClickTimes(x, y) {
+                //     return y.clickTimes - x.clickTimes;
+                // },
+                // sortBySaleTimes(x, y) {
+                //     return y.saleTimes - x.saleTimes;
+                // },
+                // sortComprehensive(x, y) {
+                //     return (y.SaleTimes * 1.5 + y.ClickTimes) - (x.SaleTimes * 1.5 + x.ClickTimes);
+                // }
             }
         })
     </script>

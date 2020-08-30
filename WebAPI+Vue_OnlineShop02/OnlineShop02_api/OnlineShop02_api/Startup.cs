@@ -27,6 +27,7 @@ namespace OnlineShop02_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped(typeof(OnlineShopApiContext));
+            services.AddCors(a => a.AddPolicy("any", ap => ap.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
             services.AddControllers();
         }
 
@@ -39,8 +40,8 @@ namespace OnlineShop02_api
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
