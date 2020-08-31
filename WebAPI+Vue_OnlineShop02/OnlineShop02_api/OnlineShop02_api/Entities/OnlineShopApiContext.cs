@@ -25,6 +25,7 @@ namespace OnlineShop02_api.Entities
 
         // 到資料庫生成的表也會叫Products
         public DbSet<Products> Products { get; set; }
+        public DbSet<ShoppingCarts> ShoppingCarts { get; set; }
 
         // 生成時順便對table做一些配置
         protected override void OnModelCreating(ModelBuilder modelBuilder)

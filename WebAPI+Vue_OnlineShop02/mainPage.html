@@ -27,13 +27,28 @@
             margin-bottom: 5px;
         }
 
-        .top input {
+        .top div {
             width: 80%;
-            display: block;
             margin: auto;
             border-radius: 4px;
             border: 0 none;
             height: 30px;
+            background-color: #fff;
+        }
+
+        .top input {
+            width: 80%;
+            border-radius: 4px;
+            border: 0 none;
+            height: 28px;
+            outline: none;
+        }
+
+        .top button {
+            width: 18%;
+            background-color: #fff;
+            border: 0 none;
+            outline: none;
         }
 
         .center .product-sort {
@@ -115,7 +130,10 @@
     <div id="app">
         <div class="top">
             <p>線商a服裝商店</p>
-            <input type="text" placeholder="請輸入搜尋內容">
+            <div>
+                <input type="text" placeholder=" 請輸入搜尋內容" v-model="searchText">
+                <button @click="search">Search</button>
+            </div>
         </div>
         <div class="center">
             <div class="center-tab" v-if="tabIndex == 1">
@@ -131,7 +149,7 @@
                         </td>
                         <td class="pro-info">
                             <p class="p-name">{{item.productName}}</p>
-                            <p class="p-price">{{item.price}}</p>
+                            <p class="p-price">{{item.price}}<span style="float: right;margin-right: 10px;">加入購物車</span></p>
                         </td>
                     </tr>
                 </table>
@@ -153,15 +171,21 @@
                 tabIndex: 1,
                 products: [],
                 sortIndex: 1,
+                searchText: ""
             },
             mounted() {
                 this.getProducts();
             },
             methods: {
-                getProducts() {
+                getProducts(searchFun) {
                     axios.get("https://localhost:44341/api/products")
-                        .then((res) => this.products = res.data);
-                    this.changeSort(this.sortIndex);
+                        .then((res) => {
+                            this.products = res.data;
+                            this.changeSort(this.sortIndex);
+                            if (searchFun != null) {
+                                searchFun();
+                            }
+                        });
                 },
                 changeTab(tabIndex) {
                     this.tabIndex = tabIndex;
@@ -180,23 +204,17 @@
                         // 綜合排序
                         case 1:
                             // this.products.sort(this.sortComprehensive);
-                            this.products.sort((x, y) => {
-                                return (y.saleTimes * 1.5 + y.clickTimes) - (x.saleTimes * 1.5 + x.clickTimes);
-                            });
+                            this.products.sort((x, y) => (y.saleTimes * 1.5 + y.clickTimes) - (x.saleTimes * 1.5 + x.clickTimes));
                             break;
                         // 按照歷史點擊量排序
                         case 2:
                             // this.products.sort(this.sortByClickTimes);
-                            this.products.sort((x, y) => {
-                                return y.clickTimes - x.clickTimes;
-                            });
+                            this.products.sort((x, y) => y.clickTimes - x.clickTimes);
                             break;
                         // 按照銷貨量排序
                         case 3:
                             // this.products.sort(this.sortBySaleTimes);
-                            this.products.sort((x, y) => {
-                                return y.saleTimes - x.saleTimes;
-                            });
+                            this.products.sort((x, y) => y.saleTimes - x.saleTimes);
                             break;
                         default:
                             break;
@@ -212,6 +230,12 @@
                 // sortComprehensive(x, y) {
                 //     return (y.SaleTimes * 1.5 + y.ClickTimes) - (x.SaleTimes * 1.5 + x.ClickTimes);
                 // }
+                // 正常搜索要放後端查好再傳過來前端
+                search() {
+                    this.getProducts(() => {
+                        this.products = this.products.filter((m) => m.productName.includes(this.searchText));
+                    })
+                }
             }
         })
     </script>

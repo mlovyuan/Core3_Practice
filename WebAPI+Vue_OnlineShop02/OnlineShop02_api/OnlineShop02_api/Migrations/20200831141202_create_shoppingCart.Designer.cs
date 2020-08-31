@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop02_api.Entities;
 
 namespace OnlineShop02_api.Migrations
 {
     [DbContext(typeof(OnlineShopApiContext))]
-    partial class OnlineShopApiContextModelSnapshot : ModelSnapshot
+    [Migration("20200831141202_create_shoppingCart")]
+    partial class create_shoppingCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,38 +58,6 @@ namespace OnlineShop02_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products","ps");
-                });
-
-            modelBuilder.Entity("OnlineShop02_api.Entities.ShoppingCarts", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ShoppingCarts");
-                });
-
-            modelBuilder.Entity("OnlineShop02_api.Entities.ShoppingCarts", b =>
-                {
-                    b.HasOne("OnlineShop02_api.Entities.Products", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

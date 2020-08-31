@@ -24,6 +24,7 @@ namespace OnlineShop02_api.Controllers
 
         // GET: api/Products
         [HttpGet]
+        [HttpGet("str")]
         public async Task<ActionResult<IEnumerable<Products>>> GetProducts()
         {
             return await _context.Products.ToListAsync();
@@ -36,6 +37,23 @@ namespace OnlineShop02_api.Controllers
             var products = await _context.Products.FindAsync(id);
 
             if (products == null)
+            {
+                return NotFound();
+            }
+
+            return products;
+        }
+        /// <summary>
+        /// 搜索用的
+        /// </summary>
+        /// <param name="pName"></param>
+        /// <returns></returns>
+        [HttpGet("str/{pName}")]
+        public async Task<ActionResult<IEnumerable<Products>>> GetProducts(string pName)
+        {
+            var products = await _context.Products.Where((x) => x.ProductName.Contains(pName)).ToListAsync();
+
+            if (products.Count <= 0)
             {
                 return NotFound();
             }
