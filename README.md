@@ -80,3 +80,16 @@ public void ConfigureServices(IServiceCollection services)
 - `this.$route.query.id`取得上個頁面網址上的參數(ex: ?id=2)。
 - 因前後端分離，port不同，傳輸資料會有跨域問題，此時可在後段的startup.cs註冊跨域服務，controller中也要加入中也要加入`[EnableCors("註冊的名字")]`才行。
 - 後端controller內的action想獲取前端傳入api的參數，其名稱需一致，像api參數為?productid=10，後端action的形參也要命名為productid才可接收到。
+
+<br>
+<br>
+
+
+### WebAPI+Vue_OnlineShop02
+---
+- 此次練習，後端採用code first方式開發，頁面以手機畫面做設計呈現。
+- 實作商品搜尋與排序的功能。
+- 實作商品頁與購物車以tab方式呈現。
+- code first除了Entities要自己輸入外，`Startup.cs`也需要加入對應的服務。
+- 理論上方法可以多載，但當參數進入路由後，因多載的關係會導致無法判斷前端傳遞過來的參數（ex：型別不同）應該交由哪個方法執行，因此建議在多載方法上方重新定義路由位置，可參考`ProductsController.cs`的`GetProducts`方法Attribute，而單個方法想於同個controller內能因不同路由呼叫方式被執行，也可參考`GetProducts`方法上方的Attribute。
+- 注意！WebAPI傳往前端的資料經過axios其內各屬性首字母會被轉換為小寫。
