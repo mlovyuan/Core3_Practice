@@ -107,6 +107,19 @@
             font-weight: bold;
         }
 
+        .center td .p-price p {
+            width: 25%;
+            float: right;
+        }
+
+        .center td .p-price p input {
+            width: 50%;
+            border: 0 none;
+            outline: none;
+            text-align: center;
+            margin: auto;
+        }
+
         .bottom {
             border-top: 1px solid #ccc;
             position: fixed;
@@ -149,13 +162,39 @@
                         </td>
                         <td class="pro-info">
                             <p class="p-name">{{item.productName}}</p>
-                            <p class="p-price">{{item.price}}<span style="float: right;margin-right: 10px;">加入購物車</span></p>
+                            <p class="p-price">{{item.price}}<span style="float: right;margin-right: 10px;"
+                                    @click="addCart(item)">加入購物車</span></p>
                         </td>
                     </tr>
                 </table>
             </div>
             <div class="center-tab" v-if="tabIndex == 2">
-
+                <table>
+                    <tr class="all-check">
+                        <td class="pro-check" colspan="3">
+                            <input type="checkbox">全選
+                        </td>
+                    </tr>
+                    <tr v-for="item in shoppingCarts">
+                        <td class="pro-check">
+                            <input type="checkbox">
+                        </td>
+                        <td class="pro-img">
+                            <img :src="item.product.imageUrl" alt="">
+                        </td>
+                        <td class="pro-info">
+                            <p class="p-name">{{item.product.productName}} {{item.product.size}}</p>
+                            <div class="p-price">
+                                ${{item.product.price}}
+                                <p>
+                                    <span @click="reductNum(item)">-</span>
+                                    <input type="text" :value="item.count" @change="chandeNum(item)">
+                                    <span @click="addNum(item)">+</span>
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="bottom">
@@ -171,14 +210,15 @@
                 tabIndex: 1,
                 products: [],
                 sortIndex: 1,
-                searchText: ""
+                searchText: "",
+                shoppingCarts: []
             },
             mounted() {
                 this.getProducts();
             },
             methods: {
                 getProducts(searchFun) {
-                    axios.get("https://localhost:44341/api/products")
+                    axios.get("https://localhost:44341/api/Products")
                         .then((res) => {
                             this.products = res.data;
                             this.changeSort(this.sortIndex);
@@ -187,12 +227,19 @@
                             }
                         });
                 },
+                getShoppingCarts() {
+                    axios.get("https://localhost:44341/api/ShoppingCarts")
+                        .then((res) => {
+                            this.shoppingCarts = res.data;
+                        });
+                },
                 changeTab(tabIndex) {
                     this.tabIndex = tabIndex;
                     switch (tabIndex) {
                         case 1:
                             break;
                         case 2:
+                            this.getShoppingCarts();
                             break;
                         default:
                             break;
@@ -230,11 +277,38 @@
                 // sortComprehensive(x, y) {
                 //     return (y.SaleTimes * 1.5 + y.ClickTimes) - (x.SaleTimes * 1.5 + x.ClickTimes);
                 // }
-                // 正常搜索要放後端查好再傳過來前端
                 search() {
-                    this.getProducts(() => {
-                        this.products = this.products.filter((m) => m.productName.includes(this.searchText));
-                    })
+                    // 前端做法
+                    // this.getProducts(() => {
+                    //     this.products = this.products.filter((m) => m.productName.includes(this.searchText));
+                    // })
+                    axios.get("https://localhost:44341/api/Products/str" + this.searchText)
+                        .then((res) => this.products = res.data);
+                },
+                addCart(product) {
+                    let count = 1;
+                    // 暫定先拿固定size
+                    let size = product.size.split(",")[0];
+                    let pid = product.id;
+                    axios.post("https://localhost:44341/api/ShoppingCarts/", { count, size, productId: pid })
+                        .then((res) => this.products = res.data);
+                },
+                reductNum(product) {
+                    if (product.count > 1) {
+                        product.count--;
+                    }
+                },
+                addNum(product) {
+                    product.count++;
+                },
+                chandeNum(product) {
+                    let n = event.target.count;
+                    if (!isNaN(n) && n > 0) {
+                        product.count = n;
+                    }
+                    else{
+                        event.target.count =product.count;
+                    }
                 }
             }
         })
