@@ -26,7 +26,7 @@
 
 ### 02   ASP.NET Core MVC練習
 ---
-- 過去多數的Html Helpers => Core的Tag Helpers，Views/_ViewImports添加Tag Helpers。
+- 過去多數的Html Helpers => Core的Tag Helpers，Views/_ViewImports_ 添加Tag Helpers。
 - asp-route傳遞的value 和 method(action)要承接的參數名要一樣。
 - appSettings.json(組態設定檔) 裡的設定值可透過`IConfiguration`讀取，一般會到 startup.cs 使用DI機制從建構式取得 IConfiguration 並保存供後續使用。又或是到`ConfigureServices()`採`IOptions<>`方式取得並應用，詳見DepartmentController 或 DepartmentController.cshtml。
 
@@ -93,3 +93,16 @@ public void ConfigureServices(IServiceCollection services)
 - code first除了Entities要自己輸入外，`Startup.cs`也需要加入對應的服務。
 - 理論上方法可以多載，但當參數進入路由後，因多載的關係會導致無法判斷前端傳遞過來的參數（ex：型別不同）應該交由哪個方法執行，因此建議在多載方法上方重新定義路由位置，可參考`ProductsController.cs`的`GetProducts`方法Attribute，而單個方法想於同個controller內能因不同路由呼叫方式被執行，也可參考`GetProducts`方法上方的Attribute。
 - 注意！WebAPI傳往前端的資料經過axios其內各屬性首字母會被轉換為小寫。
+
+<br>
+<br>
+
+
+### WebAPI+Vue_RecruitmentPage(進行中)
+---
+- 本次練習採Db first，指令為`Scaffold-DbContext "Data Source=(localdb)\MSSQLLocalDB;database=XXX;" Microsoft.EntityFrameworkCore.SqlServer -O Entities`。
+- 使用Swagger套件 _API文件產生器_ 進行文件撰寫，其中`AddSwaggerGen`用作取得API規格並產生Swagger Document物件，`UseSwagger`和`UseSwaggerUI`分別為加入至Middleware後，可從URL查看Swagger Document，以及UI介面上的美化。
+- 初步了解DB適合的設計模式。
+  - Singleton(單例模式)：單例模式就是保證在整個應用程序的生命週期中，任何時刻該類只有一個實體。(適用於過去的EF，CallContext)(code待補)
+  - Scoped(線程內唯一)：每個請求(Request)產生後都會重新new一個新的實體。(適用於.NET Core)
+  - Transient：每次注入時，都重新new一個新的實體。(目前所學不在DB考慮)
