@@ -18,7 +18,7 @@ namespace RecruitmentPageAPI.Etities
         public string PositionInfo { get; set; }
         public int? CompanyId { get; set; }
         public virtual Companys Company { get; set; }
-        public virtual Cities WorkPlaceNavigation { get; set; }
+        public virtual Cities City { get; set; }
 
 
     }
