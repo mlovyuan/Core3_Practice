@@ -7,5 +7,6 @@ namespace DapperPractice.SqlContext
 {
     public class ConnectionOptions
     {
+        public static string ConnectionString { get; set; }
     }
 }

@@ -51,5 +51,11 @@ namespace DapperPractice.SqlContext
         {
             return _dbConnection.Query<T>(sql, param, transaction, buffered, commandTimeout, commandType);
         }
+
+        public int Excute<T>(string sql, object param = null, IDbTransaction transaction = null,
+           int? commandTimeout = null, CommandType? commandType = null)
+        {
+            return _dbConnection.Execute(sql, param, transaction,  commandTimeout, commandType);
+        }
     }
 }
