@@ -98,11 +98,11 @@ public void ConfigureServices(IServiceCollection services)
 <br>
 
 
-### WebAPI+Vue_RecruitmentPage(進行中)
+### WebAPI+Vue_RecruitmentPage(未完成)
 ---
 - 本次練習採Db first，指令為`Scaffold-DbContext "Data Source=(localdb)\MSSQLLocalDB;database=XXX;" Microsoft.EntityFrameworkCore.SqlServer -O Entities`。
 - 使用Swagger套件 _API文件產生器_ 進行文件撰寫，其中`AddSwaggerGen`用作取得API規格並產生Swagger Document物件，`UseSwagger`和`UseSwaggerUI`分別為加入至Middleware後，可從URL查看Swagger Document，以及UI介面上的美化。
 - 初步了解DB適合的設計模式。
   - Singleton(單例模式)：單例模式就是保證在整個應用程序的生命週期中，任何時刻該類只有一個實體。(適用於過去的EF，CallContext)(code待補)
-  - Scoped(線程內唯一)：每個請求(Request)產生後都會重新new一個新的實體。(適用於.NET Core)
+  - Scoped(線程內唯一)：每個請求(Request)產生後都會重新new一個新的實體。(適用於.NET Core，原因在於開方時若前端同時呼叫後端多個方法時才不會因為Db不是各自獨立運行而卡住出錯)
   - Transient：每次注入時，都重新new一個新的實體。(目前所學不在DB考慮)
