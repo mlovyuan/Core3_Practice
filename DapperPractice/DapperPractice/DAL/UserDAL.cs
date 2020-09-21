@@ -13,7 +13,7 @@ namespace DapperPractice.DAL
         public Users GetUserByLogin(string userName, string password)
         {
             string sql = "Select * from Users where UserName = @userName and Password = @password";
-            // new 裡面本來應該要是{ userName : userName, password : password }
+            // new 裡面本來應該要是{ userName : userName, password : password }，跟ES6的object有點像
             // 前為後端屬性名稱，後為變數，但因要傳入的值在sql中採用變數方式，所以可以用變數名稱直接簡寫
             var user = _db.QueryFirst<Users>(sql, new { userName, password });
 

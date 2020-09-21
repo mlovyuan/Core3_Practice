@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DapperPractice.SqlContext
 {
-    public class ConnectionOptions
+    public class ConnectionOption
     {
         public static string ConnectionString { get; set; }
     }

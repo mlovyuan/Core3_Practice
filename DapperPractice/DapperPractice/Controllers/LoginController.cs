@@ -13,7 +13,7 @@ namespace DapperPractice.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("{u}/{p}")]
         public Users Get(string userName, string password)
         {
             return new UserDAL().GetUserByLogin(userName, password);

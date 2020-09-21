@@ -13,10 +13,13 @@ namespace DapperPractice.SqlContext
         static IDbConnection _dbConnection = new SqlConnection();
 
         // 其實就是get{ return... }
-        public string ConnectionString => ConnectionOptions.ConnectionString;
+        public string ConnectionString => ConnectionOption.ConnectionString;
         public DapperHelper()
         {
-            _dbConnection.ConnectionString = ConnectionString;
+            if (string.IsNullOrEmpty(_dbConnection.ConnectionString))
+            {
+                _dbConnection.ConnectionString = ConnectionString;
+            }
         }
 
         /// <summary>
@@ -29,10 +32,17 @@ namespace DapperPractice.SqlContext
         /// <param name="commandTimeout">超時時間</param>
         /// <param name="commandType">command類型</param>
         /// <returns></returns>
-        public T QueryFirst<T>(string sql, object param = null, IDbTransaction transaction = null, 
+        public T QueryFirst<T>(string sql, object param = null, IDbTransaction transaction = null,
             int? commandTimeout = null, CommandType? commandType = null)
         {
-            return _dbConnection.QueryFirst<T>(sql, param, transaction,commandTimeout, commandType);
+            _dbConnection.Open();
+            using (transaction = _dbConnection.BeginTransaction())
+            {
+                var result = _dbConnection.QueryFirstOrDefault<T>(sql, param, transaction, commandTimeout, commandType);
+                transaction.Commit();
+                _dbConnection.Close();
+                return result;
+            }
         }
 
         /// <summary>
@@ -55,7 +65,7 @@ namespace DapperPractice.SqlContext
         public int Excute<T>(string sql, object param = null, IDbTransaction transaction = null,
            int? commandTimeout = null, CommandType? commandType = null)
         {
-            return _dbConnection.Execute(sql, param, transaction,  commandTimeout, commandType);
+            return _dbConnection.Execute(sql, param, transaction, commandTimeout, commandType);
         }
     }
 }
